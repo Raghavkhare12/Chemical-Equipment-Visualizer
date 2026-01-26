@@ -50,16 +50,27 @@ function UploadForm() {
       {loading && <p>Uploading...</p>}
 
       {summary && (
-        <div style={{ marginTop: "20px" }}>
-            <h3>Summary</h3>
-            <p>Total Equipment: {summary.total_count}</p>
-            <p>Average Flowrate: {summary.avg_flowrate}</p>
-            <p>Average Pressure: {summary.avg_pressure}</p>
-            <p>Average Temperature: {summary.avg_temperature}</p>
+    <div style={{ marginTop: "20px" }}>
+      <h3>Summary</h3>
+      <p>Total Equipment: {summary.total_count}</p>
+      <p>Average Flowrate: {summary.avg_flowrate}</p>
+      <p>Average Pressure: {summary.avg_pressure}</p>
+      <p>Average Temperature: {summary.avg_temperature}</p>
 
-            <Charts summary={summary} />
-        </div>
-        )}
+      <Charts summary={summary} />
+
+      <a
+        href="http://127.0.0.1:8000/api/report/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <button style={{ marginTop: "20px" }}>
+          Download PDF Report
+        </button>
+      </a>
+    </div>
+  )}
+
 
     </div>
   );
