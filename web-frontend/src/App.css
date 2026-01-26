@@ -1,0 +1,71 @@
+body {
+  background: #f4f6f8;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 900px;
+  margin: 30px auto;
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.upload-box {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.upload-box input {
+  margin-right: 10px;
+}
+
+button {
+  padding: 8px 14px;
+  background: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #125aa0;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: #f0f3f7;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.chart-box {
+  background: #f9fbfd;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.download-btn {
+  display: block;
+  margin: auto;
+  background: #2e7d32;
+}
+
+.download-btn:hover {
+  background: #1b5e20;
+}

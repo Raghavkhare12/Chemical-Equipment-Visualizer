@@ -26,9 +26,7 @@ function UploadForm() {
         "http://127.0.0.1:8000/api/upload/",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
 
@@ -42,36 +40,113 @@ function UploadForm() {
   };
 
   return (
-    <div>
-      <input type="file" accept=".csv" onChange={handleFileChange} />
-      <br /><br />
-      <button onClick={handleUpload}>Upload CSV</button>
+    <div style={{ maxWidth: "1100px", margin: "auto", padding: "30px" }}>
+      <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
+        ⚗️ Chemical Equipment Parameter Visualizer
+      </h1>
 
-      {loading && <p>Uploading...</p>}
-
-      {summary && (
-    <div style={{ marginTop: "20px" }}>
-      <h3>Summary</h3>
-      <p>Total Equipment: {summary.total_count}</p>
-      <p>Average Flowrate: {summary.avg_flowrate}</p>
-      <p>Average Pressure: {summary.avg_pressure}</p>
-      <p>Average Temperature: {summary.avg_temperature}</p>
-
-      <Charts summary={summary} />
-
-      <a
-        href="http://127.0.0.1:8000/api/report/"
-        target="_blank"
-        rel="noreferrer"
+      {/* Upload Card */}
+      <div
+        style={{
+          background: "#f9f9f9",
+          padding: "20px",
+          borderRadius: "12px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+          textAlign: "center",
+        }}
       >
-        <button style={{ marginTop: "20px" }}>
-          Download PDF Report
+        <input type="file" accept=".csv" onChange={handleFileChange} />
+        <br />
+        <br />
+        <button
+          onClick={handleUpload}
+          style={{
+            padding: "10px 25px",
+            background: "#1976d2",
+            color: "white",
+            border: "none",
+            borderRadius: "6px",
+            cursor: "pointer",
+          }}
+        >
+          Upload CSV
         </button>
-      </a>
+
+        {loading && <p style={{ marginTop: "10px" }}>Uploading...</p>}
+      </div>
+
+      {/* SUMMARY + CHARTS */}
+      {summary && (
+        <>
+          {/* Summary Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(4, 1fr)",
+              gap: "20px",
+              marginTop: "30px",
+            }}
+          >
+            <SummaryCard label="Total Equipment" value={summary.total_count} />
+            <SummaryCard
+              label="Avg Flowrate"
+              value={summary.avg_flowrate.toFixed(2)}
+            />
+            <SummaryCard
+              label="Avg Pressure"
+              value={summary.avg_pressure.toFixed(2)}
+            />
+            <SummaryCard
+              label="Avg Temperature"
+              value={summary.avg_temperature.toFixed(2)}
+            />
+          </div>
+
+          {/* Charts */}
+          <Charts summary={summary} />
+
+          {/* PDF Button */}
+          <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <a
+              href="http://127.0.0.1:8000/api/report/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button
+                style={{
+                  padding: "12px 30px",
+                  background: "#2e7d32",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  fontSize: "15px",
+                }}
+              >
+                📄 Download PDF Report
+              </button>
+            </a>
+          </div>
+        </>
+      )}
     </div>
-  )}
+  );
+}
 
-
+/* Small Reusable Card */
+function SummaryCard({ label, value }) {
+  return (
+    <div
+      style={{
+        background: "#ffffff",
+        padding: "15px",
+        borderRadius: "10px",
+        textAlign: "center",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.08)",
+      }}
+    >
+      <h4 style={{ marginBottom: "8px", color: "#555" }}>{label}</h4>
+      <h2 style={{ margin: 0, color: "#1976d2" }}>{value}</h2>
     </div>
   );
 }

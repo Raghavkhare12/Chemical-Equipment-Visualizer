@@ -57,18 +57,48 @@ function Charts({ summary }) {
   };
 
   return (
-    <div style={{ marginTop: "30px" }}>
-      <h3>Equipment Type Distribution</h3>
-      <div style={{ width: "400px" }}>
-        <Pie data={pieData} />
-      </div>
+  <div style={{ marginTop: "30px" }}>
 
-      <h3 style={{ marginTop: "40px" }}>Average Parameters</h3>
-      <div style={{ width: "500px" }}>
-        <Bar data={barData} />
-      </div>
+    <div style={{ maxWidth: "450px", margin: "auto" }}>
+      <Pie
+        data={pieData}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: { position: "bottom" },
+            title: {
+              display: true,
+              text: "Equipment Type Distribution",
+              font: { size: 16 }
+            },
+          },
+        }}
+      />
     </div>
-  );
+
+    <div style={{ maxWidth: "600px", margin: "50px auto" }}>
+      <Bar
+        data={barData}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            title: {
+              display: true,
+              text: "Average Equipment Parameters",
+              font: { size: 16 }
+            },
+          },
+          scales: {
+            y: { beginAtZero: true }
+          }
+        }}
+      />
+    </div>
+
+  </div>
+);
+
 }
 
 export default Charts;
