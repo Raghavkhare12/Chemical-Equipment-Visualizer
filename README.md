@@ -226,8 +226,6 @@ The system checks for:
 * Average parameters
 * Equipment type distribution
 
-(Upcoming: charts and tables in PDF)
-
 ---
 
 ## 🎯 Project Objective
@@ -244,11 +242,8 @@ To build a **Hybrid Web + Desktop Analytics System** using:
 
 ## 📌 Future Enhancements
 
-* 📈 Trend line charts per equipment
-* 📄 Full dashboard export as PDF
 * 🧠 ML-based anomaly detection
 * 🔐 User authentication
-* ☁️ Cloud deployment
 
 ---
 
@@ -261,4 +256,4 @@ Computer Science Engineering(AI and ML)
 ---
 
 
-Just tell me what you want next, Raghav 🔥💪
+
