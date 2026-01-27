@@ -47,7 +47,8 @@ def analyze_csv(file):
         "avg_flowrate": round(df["Flowrate"].mean(), 2),
         "avg_pressure": round(df["Pressure"].mean(), 2),
         "avg_temperature": round(df["Temperature"].mean(), 2),
-        "type_distribution": df["Type"].value_counts().to_dict()
+        "type_distribution": df["Type"].value_counts().to_dict(),
+        "rows": df.to_dict(orient="records")  # 👈 ADD THIS
     }
 
     return summary
