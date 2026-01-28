@@ -11,6 +11,15 @@ This project focuses on **data visualization, analytics, and smart system sugges
 
 ---
 
+## 🌍 Live Demo (Web App)
+
+🔗 **Deployed Website:**  
+👉 https://chemical-equipment-visualizer.netlify.app/
+
+> Upload the sample CSV file and explore full analytics, charts, smart suggestions, and PDF export features directly in your browser.
+
+---
+
 ## 🚀 Features
 
 ###  Common (Web + Desktop)
