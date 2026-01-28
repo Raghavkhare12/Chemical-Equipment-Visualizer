@@ -32,7 +32,7 @@ function UploadForm() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/upload/",
+        "https://chemical-backend-qxf2.onrender.com/api/upload/",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

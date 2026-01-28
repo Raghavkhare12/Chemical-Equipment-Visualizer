@@ -10,7 +10,7 @@ function HistoryViewer({ onSelect }) {
 
   const fetchHistory = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:8000/api/history/");
+      const res = await axios.get("https://chemical-backend-qxf2.onrender.com/api/history/");
       setHistory(res.data);
     } catch (err) {
       console.error("History fetch failed", err);
