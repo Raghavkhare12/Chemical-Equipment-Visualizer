@@ -11,75 +11,75 @@ This project focuses on **data visualization, analytics, and smart system sugges
 
 ---
 
-## 🌍 Live Demo (Web App)
+##  Live Demo (Web App)
 
 🔗 **Deployed Website:**  
-👉 https://chemical-equipment-visualizer.netlify.app/
+ https://chemical-equipment-visualizer.netlify.app/
 
 > Upload the sample CSV file and explore full analytics, charts, smart suggestions, and PDF export features directly in your browser.
 
 ---
 
-## 🚀 Features
+##  Features
 
 ###  Common (Web + Desktop)
 
-* 📂 Upload CSV files of equipment data
-* 📊 Automatic data analysis using Pandas
-* 📈 Visual charts:
+*  Upload CSV files of equipment data
+*  Automatic data analysis using Pandas
+*  Visual charts:
 
   * Equipment type distribution (Pie Chart)
   * Average parameters (Bar Chart)
-* 📋 Equipment data table
-* 🧠 Smart System Suggestions Engine:
+*  Equipment data table
+*  Smart System Suggestions Engine:
 
   * Detects unsafe pressure
   * Detects overheating
   * Detects flow issues
-* 📄 Download summary PDF report
-* 🗂️ Upload history (last 5 datasets)
+*  Download summary PDF report
+*  Upload history (last 5 datasets)
 
 ---
 
-### 🌐 Web Application (React)
+###  Web Application (React)
 
-* 🎨 Modern gradient UI with cards
-* 📊 Animated charts using Chart.js
-* 📥 Export charts as images
-* 🔍 Sortable equipment table
-* 🧠 Color-coded smart alerts
-* 📄 Download PDF report from backend
-
----
-
-### 🖥️ Desktop Application (PyQt5)
-
-* 🎯 Same layout and color theme as web app
-* 📊 Matplotlib charts embedded in UI
-* 📋 Equipment table view
-* 🧠 Smart alerts section
-* 📥 Save charts as images
-* 📂 Upload CSV directly to Django API
+*  Modern gradient UI with cards
+*  Animated charts using Chart.js
+*  Export charts as images
+*  Sortable equipment table
+*  Color-coded smart alerts
+*  Download PDF report from backend
 
 ---
 
-## 📸 Application Screenshots
+###  Desktop Application (PyQt5)
 
-### 🌐 Web Dashboard
+*  Same layout and color theme as web app
+*  Matplotlib charts embedded in UI
+*  Equipment table view
+*  Smart alerts section
+*  Save charts as images
+*  Upload CSV directly to Django API
+
+---
+
+##  Application Screenshots
+
+###  Web Dashboard
 
 ![Charts View](screenshots/charts.png)
 ![Web Dashboard](screenshots/web_dashboard.png)
 
 ---
 
-### 🖥 Desktop Application
+###  Desktop Application
 
 ![Desktop Application](screenshots/desktop_dashboard.png)
 ![Desktop Application](screenshots/desktop_dashboard2.png)
 
 ---
 
-## 🧰 Tech Stack
+##  Tech Stack
 
 | Layer              | Technology                    |
 | ------------------ | ----------------------------- |
@@ -93,7 +93,7 @@ This project focuses on **data visualization, analytics, and smart system sugges
 
 ---
 
-## 📁 CSV File Format (Required)
+##  CSV File Format (Required)
 
 Your CSV must contain exactly these columns:
 
@@ -107,7 +107,7 @@ HeatExchanger-1,HeatExchanger,150,6.2,130
 
 ---
 
-## ⚙️ Backend Setup (Django)
+##  Backend Setup (Django)
 
 ### 1️⃣ Create Virtual Environment
 
@@ -142,7 +142,7 @@ http://127.0.0.1:8000/api/upload/
 
 ---
 
-## 🌐 Web App Setup (React)
+##  Web App Setup (React)
 
 ### 1️⃣ Go to frontend folder
 
@@ -170,7 +170,7 @@ http://localhost:3000
 
 ---
 
-## 🖥️ Desktop App Setup (PyQt5)
+##  Desktop App Setup (PyQt5)
 
 ### 1️⃣ Go to desktop app folder
 
@@ -194,7 +194,7 @@ python main.py
 
 ---
 
-## 🧠 Smart Suggestions Engine — Rules
+##  Smart Suggestions Engine — Rules
 
 The system checks for:
 
@@ -230,7 +230,7 @@ The system checks for:
 
 ---
 
-## 📄 PDF Report Includes
+##  PDF Report Includes
 
 * Total equipment count
 * Average parameters
@@ -238,7 +238,7 @@ The system checks for:
 
 ---
 
-## 🎯 Project Objective
+##  Project Objective
 
 To build a **Hybrid Web + Desktop Analytics System** using:
 
@@ -250,14 +250,14 @@ To build a **Hybrid Web + Desktop Analytics System** using:
 
 ---
 
-## 📌 Future Enhancements
+##  Future Enhancements
 
-* 🧠 ML-based anomaly detection
-* 🔐 User authentication
+*  ML-based anomaly detection
+*  User authentication
 
 ---
 
-## 👨‍💻 Developed By
+##  Developed By
 
 **Raghav Khare**
 VIT Bhopal University
