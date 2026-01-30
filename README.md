@@ -75,6 +75,7 @@ This project focuses on **data visualization, analytics, and smart system sugges
 ### 🖥 Desktop Application
 
 ![Desktop Application](screenshots/desktop_dashboard.png)
+![Desktop Application](screenshots/desktop_dashboard2.png)
 
 ---
 
