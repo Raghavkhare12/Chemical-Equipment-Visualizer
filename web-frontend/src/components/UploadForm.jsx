@@ -1,9 +1,11 @@
-import Charts from "./Charts";
 import React, { useState, useRef } from "react";
 import axios from "axios";
+
+import Charts from "./Charts";
 import DataTable from "./DataTable";
 import HistoryViewer from "./HistoryViewer";
 import Suggestions from "./Suggestions";
+import Diagnostics from "./Diagnostics";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -12,10 +14,10 @@ function UploadForm() {
   const [file, setFile] = useState(null);
   const [summary, setSummary] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [selectedFromHistory, setSelectedFromHistory] = useState(null);
 
   const dashboardRef = useRef(null);
 
+  /* ---------- FILE HANDLING ---------- */
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -31,12 +33,11 @@ function UploadForm() {
 
     try {
       setLoading(true);
+
       const response = await axios.post(
         "https://chemical-backend-qxf2.onrender.com/api/upload/",
         formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
 
       setSummary(response.data);
@@ -48,45 +49,31 @@ function UploadForm() {
     }
   };
 
-  // ✅ EXPORT FULL DASHBOARD AS PDF
+  /* ---------- EXPORT PDF ---------- */
   const downloadFullDashboardPDF = async () => {
-    const element = dashboardRef.current;
-
-    const canvas = await html2canvas(element, {
+    const canvas = await html2canvas(dashboardRef.current, {
       scale: 2,
       useCORS: true,
     });
 
     const imgData = canvas.toDataURL("image/png");
-
     const pdf = new jsPDF("p", "mm", "a4");
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-    let heightLeft = pdfHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
-    heightLeft -= pdf.internal.pageSize.getHeight();
-
-    while (heightLeft > 0) {
-      position = heightLeft - pdfHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
-      heightLeft -= pdf.internal.pageSize.getHeight();
-    }
-
+    pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
     pdf.save("Chemical_Equipment_Dashboard.pdf");
   };
 
   return (
     <div style={{ maxWidth: "1150px", margin: "auto", padding: "30px" }}>
+      {/* ---------- TITLE ---------- */}
       <h1 style={{ textAlign: "center", marginBottom: "20px" }}>
-         Chemical Equipment Parameter Visualizer
+        Chemical Equipment Parameter Visualizer
       </h1>
 
-      {/* Upload Card */}
+      {/* ---------- UPLOAD CARD ---------- */}
       <div
         style={{
           background: "#ffffff",
@@ -99,6 +86,7 @@ function UploadForm() {
         <input type="file" accept=".csv" onChange={handleFileChange} />
         <br />
         <br />
+
         <button
           onClick={handleUpload}
           style={{
@@ -116,10 +104,10 @@ function UploadForm() {
         {loading && <p style={{ marginTop: "10px" }}>Uploading...</p>}
       </div>
 
-      {/* DASHBOARD */}
+      {/* ================= DASHBOARD ================= */}
       {summary && (
         <div ref={dashboardRef}>
-          {/* Summary Cards */}
+          {/* ---------- SUMMARY CARDS ---------- */}
           <div
             style={{
               display: "grid",
@@ -143,21 +131,24 @@ function UploadForm() {
             />
           </div>
 
-          {/* Charts */}
+          {/* ---------- CHARTS ---------- */}
           <Charts summary={summary} />
 
-          {/* Table */}
+          {/* ---------- 🧠 TREND INTERPRETATION + ROOT CAUSE ---------- */}
+          <Diagnostics rows={summary.rows} />
+
+          {/* ---------- DATA TABLE ---------- */}
           <DataTable rows={summary.rows} />
 
-          {/* Smart Suggestions */}
+          {/* ---------- SMART SUGGESTIONS ---------- */}
           <Suggestions rows={summary.rows} />
 
-          {/* History */}
-          <HistoryViewer onSelect={(s) => setSelectedFromHistory(s)} />
+          {/* ---------- HISTORY ---------- */}
+          <HistoryViewer />
         </div>
       )}
 
-      {/* EXPORT PDF */}
+      {/* ---------- EXPORT PDF ---------- */}
       {summary && (
         <div style={{ textAlign: "center", marginTop: "40px" }}>
           <button
@@ -180,7 +171,7 @@ function UploadForm() {
   );
 }
 
-/* Small Reusable Card */
+/* ---------- SUMMARY CARD ---------- */
 function SummaryCard({ label, value }) {
   return (
     <div

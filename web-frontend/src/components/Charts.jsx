@@ -30,16 +30,14 @@ function Charts({ summary }) {
   const barRef = useRef(null);
   const lineRef = useRef(null);
 
-  /* ---------- PIE DATA ---------- */
-  const typeLabels = Object.keys(summary.type_distribution);
-  const typeValues = Object.values(summary.type_distribution);
+  if (!summary || !summary.rows) return null;
 
+  /* ---------- PIE DATA ---------- */
   const pieData = {
-    labels: typeLabels,
+    labels: Object.keys(summary.type_distribution),
     datasets: [
       {
-        label: "Equipment Types",
-        data: typeValues,
+        data: Object.values(summary.type_distribution),
         backgroundColor: [
           "#ff6384",
           "#36a2eb",
@@ -53,12 +51,11 @@ function Charts({ summary }) {
     ],
   };
 
-  /* ---------- BAR DATA ---------- */
+  /* ---------- BAR DATA (OPTIONAL SUMMARY) ---------- */
   const barData = {
-    labels: ["Flowrate", "Pressure", "Temperature"],
+    labels: ["Avg Flowrate", "Avg Pressure", "Avg Temperature"],
     datasets: [
       {
-        label: "Average Values",
         data: [
           summary.avg_flowrate,
           summary.avg_pressure,
@@ -70,29 +67,35 @@ function Charts({ summary }) {
     ],
   };
 
-  /* ---------- LINE TREND DATA ---------- */
-  const trendLabels = summary.rows.map((r) => r.equipment_name);
+  /* ---------- LINE TREND DATA (IMPORTANT) ---------- */
+  const labels = summary.rows.map((r) => r["Equipment Name"]);
 
   const lineData = {
-    labels: trendLabels,
+    labels,
     datasets: [
       {
         label: "Flowrate",
-        data: summary.rows.map((r) => r.flowrate),
+        data: summary.rows.map((r) => r.Flowrate),
         borderColor: "#42a5f5",
-        tension: 0.3,
+        backgroundColor: "rgba(66,165,245,0.2)",
+        tension: 0.4,
+        pointRadius: 4,
       },
       {
         label: "Pressure",
-        data: summary.rows.map((r) => r.pressure),
+        data: summary.rows.map((r) => r.Pressure),
         borderColor: "#66bb6a",
-        tension: 0.3,
+        backgroundColor: "rgba(102,187,106,0.2)",
+        tension: 0.4,
+        pointRadius: 4,
       },
       {
         label: "Temperature",
-        data: summary.rows.map((r) => r.temperature),
+        data: summary.rows.map((r) => r.Temperature),
         borderColor: "#ffa726",
-        tension: 0.3,
+        backgroundColor: "rgba(255,167,38,0.2)",
+        tension: 0.4,
+        pointRadius: 4,
       },
     ],
   };
@@ -109,66 +112,69 @@ function Charts({ summary }) {
 
   return (
     <div style={{ marginTop: "40px" }}>
-      {/* ===== PIE + BAR GRID ===== */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "30px",
-        }}
-      >
-        {/* PIE CARD */}
+      {/* ===== PIE + BAR ===== */}
+      <div style={gridStyle}>
         <div style={cardStyle}>
           <h3>Equipment Type Distribution</h3>
-
-          <Pie
-            ref={pieRef}
-            data={pieData}
-            options={{
-              responsive: true,
-              animation: { animateRotate: true, duration: 1500 },
-              plugins: { legend: { position: "bottom" } },
-            }}
-          />
-
+          <Pie ref={pieRef} data={pieData} />
           <button
             style={btnBlue}
-            onClick={() => downloadChart(pieRef, "equipment_type_chart.png")}
+            onClick={() => downloadChart(pieRef, "equipment_type.png")}
           >
             📥 Download Pie Chart
           </button>
         </div>
 
-        {/* BAR CARD */}
         <div style={cardStyle}>
-          <h3>Average Parameters</h3>
-
+          <h3>Average Parameters (Summary)</h3>
           <Bar
             ref={barRef}
             data={barData}
-            options={{
-              responsive: true,
-              animation: { duration: 1500, easing: "easeOutBounce" },
-              plugins: { legend: { display: false } },
-              scales: { y: { beginAtZero: true } },
-            }}
+            options={{ plugins: { legend: { display: false } } }}
           />
-
           <button
             style={btnGreen}
-            onClick={() => downloadChart(barRef, "average_parameters_chart.png")}
+            onClick={() => downloadChart(barRef, "average_parameters.png")}
           >
             📥 Download Bar Chart
           </button>
         </div>
       </div>
 
-      
+      {/* ===== LINE TREND (MAIN CHART) ===== */}
+      <div style={{ ...cardStyle, marginTop: "30px" }}>
+        <h3>📈 Equipment Parameter Trend</h3>
+        <Line
+          ref={lineRef}
+          data={lineData}
+          options={{
+            responsive: true,
+            interaction: { mode: "index", intersect: false },
+            plugins: { legend: { position: "top" } },
+            scales: {
+              x: { title: { display: true, text: "Equipment" } },
+              y: { title: { display: true, text: "Parameter Value" } },
+            },
+          }}
+        />
+        <button
+          style={btnPurple}
+          onClick={() => downloadChart(lineRef, "parameter_trend.png")}
+        >
+          📥 Download Trend Chart
+        </button>
+      </div>
     </div>
   );
 }
 
 /* ---------- STYLES ---------- */
+const gridStyle = {
+  display: "grid",
+  gridTemplateColumns: "1fr 1fr",
+  gap: "30px",
+};
+
 const cardStyle = {
   background: "#ffffff",
   padding: "20px",
@@ -187,14 +193,7 @@ const btnBlue = {
   cursor: "pointer",
 };
 
-const btnGreen = {
-  ...btnBlue,
-  background: "#2e7d32",
-};
-
-const btnPurple = {
-  ...btnBlue,
-  background: "#7b1fa2",
-};
+const btnGreen = { ...btnBlue, background: "#2e7d32" };
+const btnPurple = { ...btnBlue, background: "#7b1fa2" };
 
 export default Charts;

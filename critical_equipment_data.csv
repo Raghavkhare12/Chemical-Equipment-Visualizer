@@ -1,7 +1,7 @@
 Equipment Name,Type,Flowrate,Pressure,Temperature
 Pump-1,Pump,120,5.2,120
 Pump-2,Pump,132,5.6,118
-Pump-3,Pump,125,2.8,145
+Pump-3,Pump,125,5.3,115
 Pump-4,Pump,130,5.9,150
 Reactor-1,Reactor,160,8.5,180
 Reactor-2,Reactor,145,7.2,138
@@ -11,6 +11,6 @@ Valve-1,Valve,55,4.0,110
 Valve-2,Valve,50,4.5,115
 Valve-3,Valve,52,4.1,120
 HeatExchanger-1,HeatExchanger,150,6.2,130
-HeatExchanger-2,HeatExchanger,145,6.8,160
+HeatExchanger-2,HeatExchanger,155,6.3,132
 Condenser-1,Condenser,160,6.8,125
 Condenser-2,Condenser,175,7.8,165

@@ -72,7 +72,7 @@ function Suggestions({ rows }) {
 
     // ---- Heat Exchanger ----
     if (type === "HeatExchanger") {
-      if (temp > 125) {
+      if (temp > 135) {
         suggestions.push({
           level: "warning",
           msg: `⚠ Heat Exchanger "${name}": High outlet temp — poor heat transfer.`,
