@@ -20,6 +20,12 @@ This project focuses on **data visualization, analytics, and smart system sugges
 
 ---
 
+##  Demo Video
+
+[Click here to watch the demo video](https://drive.google.com/file/d/1FrhV1JUZZe9sO3qWV5Rxl6rj6rynclZm/view?usp=sharing)
+
+---
+
 ##  Features
 
 ###  Common (Web + Desktop)
@@ -264,6 +270,7 @@ VIT Bhopal University
 Computer Science Engineering(AI and ML)
 
 ---
+
 
 
 
