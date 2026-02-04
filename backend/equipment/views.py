@@ -5,7 +5,7 @@ from rest_framework import status
 from django.http import FileResponse
 import os
 from django.conf import settings
-
+from django.http import JsonResponse
 
 from .models import Dataset
 from .utils import analyze_csv
@@ -49,3 +49,6 @@ class DownloadReportView(APIView):
             return Response({"error": "Report not found"}, status=404)
 
         return FileResponse(open(file_path, "rb"), content_type="application/pdf")
+
+def health(request):
+    return JsonResponse({"status": "ok"})
